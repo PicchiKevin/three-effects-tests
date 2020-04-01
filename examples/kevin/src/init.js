@@ -5,7 +5,7 @@ import load from "./libs/loader.js";
 import initGround from "./components/ground.js";
 import initSky from "./components/sky.js"
 import initPrimit from "./components/primit.js"
-
+import attachInteract from "./components/interact.js";
 
 export default function () {
   const renderer = new THREE.WebGLRenderer()
@@ -38,13 +38,14 @@ export default function () {
       console.log("Loading"+ Math.floor(pc * 100) + "%");
     }).then(function(assets) {
       var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 2000 );
-        camera.position.set(0,80,0)
+        camera.position.set(20,80,0)
       
       var user = new THREE.Group();
       user.add(camera);
       user.add(renderer.vr.getController(0),renderer.vr.getController(1));
       scene.add(user);
-
+      
+      attachInteract(scene, {debug: true});
 
       var targetPos = new THREE.Vector3();
       var origPos = new THREE.Vector3();
@@ -84,10 +85,6 @@ export default function () {
       document.body.appendChild( WEBVR.createButton( renderer ) );
 
       renderer.setAnimationLoop( function (time) {
-        camera.position.x=10*Math.sin(time/1000)+50;
-        camera.position.y=10*Math.cos(time/1000)+12;
-        camera.lookAt(new THREE.Vector3(0,0,0))
-
         renderer.render( scene, camera );
       });
 

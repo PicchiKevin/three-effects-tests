@@ -1,4 +1,4 @@
-import { THREE, attachSystem } from "../../../dist/three-effects.js";
+import { THREE, attachSystem } from "../libs/three-effects.js";
 
 export default function (scene, config) {
     config = config || {};

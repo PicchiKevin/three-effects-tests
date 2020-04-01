@@ -82,7 +82,7 @@ export default function (renderer, scene, camera, assets) {
 		light.color.lerp(col, Math.pow(1 - a, 10) );
 
 		scene.fog.color.copy(light.color).multiplyScalar(0.33);
-		scene.userData["bloom_strength"].value = 0.1 + 0.1 * a;
+		// scene.userData["bloom_strength"].value = 0.1 + 0.1 * a;
 		
 		needsUpdate = true;
 

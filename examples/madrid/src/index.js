@@ -1,8 +1,11 @@
 import { THREE, attachEffects, attach } from "../../../dist/three-effects.js";
 
+//component
 import initGround from "./ground.js";
 import initSky from "./sky.js";
 import initStatues from "./statues.js";
+
+//system / manager
 import attachInteract from "./interact.js";
 import attachLabel from "./label.js";
 
