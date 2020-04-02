@@ -1,5 +1,4 @@
-import { THREE } from "../libs/three-effects.js";
-
+import * as THREE from "../libs/three.js";
 import { Sky } from "../libs/Sky.js";
 
 export default function (renderer, scene, camera, assets) {
@@ -16,7 +15,7 @@ export default function (renderer, scene, camera, assets) {
 	_scene.add( mesh );
 
 	var shader = THREE.ShaderLib[ "cube" ];
-	shader.uniforms[ "tCube" ].value = cubeCamera.renderTarget.texture;
+	shader.uniforms[ "envMap" ].value = cubeCamera.renderTarget.texture;
 
 	var material = new THREE.ShaderMaterial( {
 
@@ -90,7 +89,7 @@ export default function (renderer, scene, camera, assets) {
 
 		renderer.vr.enabled = false;
 
-		//cubeCamera.update( renderer, _scene );
+		cubeCamera.update( renderer, _scene );
 
 		renderer.vr.enabled = vrEnabled;
 
@@ -98,17 +97,6 @@ export default function (renderer, scene, camera, assets) {
 		renderer.shadowMap.needsUpdate = true;
 	};
 
-	scene.addEventListener("afterRender", function () {
-		
-		if(needsUpdate) { 
-		
-			cubeCamera.update( renderer, _scene );
-
-			needsUpdate = false;
-		
-		}
-
-	});
 
 	window.setTimeout(fn,0);
 

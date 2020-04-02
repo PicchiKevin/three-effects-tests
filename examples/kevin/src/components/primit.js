@@ -1,4 +1,4 @@
-import {THREE} from "../libs/three-effects.js";
+import * as THREE from "../libs/three.js";
 import pop from "./pop.js";
 
 export default function (renderer, scene, camera, assets) {

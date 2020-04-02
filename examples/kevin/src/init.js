@@ -1,5 +1,5 @@
 
-import { THREE } from "./libs/three-effects.js";
+import * as THREE from "./libs/three.js";
 import { WEBVR } from "./libs/WebVR.js";
 import load from "./libs/loader.js";
 import initGround from "./components/ground.js";
@@ -14,6 +14,7 @@ export default function () {
 
   const scene = new THREE.Scene();
 
+  attachInteract(scene);
 
     load(renderer, {
       "venus_model": "./src/assets/venus/index.obj",
@@ -85,6 +86,7 @@ export default function () {
       document.body.appendChild( WEBVR.createButton( renderer ) );
 
       renderer.setAnimationLoop( function (time) {
+        scene.dispatchEvent({type: "beforeRender", renderer, camera, time: window.performance.now()});
         renderer.render( scene, camera );
       });
 

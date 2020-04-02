@@ -1,4 +1,5 @@
-import { THREE, attachSystem } from "../libs/three-effects.js";
+import * as THREE from "../libs/three.js";
+import attachSystem from "../libs/three-system.js" 
 
 export default function (scene, config) {
     config = config || {};
@@ -10,7 +11,7 @@ export default function (scene, config) {
     tubeGeometry.rotateX(Math.PI / 2);
 
     function getHand(renderer, id) {
-        var c = renderer ? renderer.vr.getController(id) : new THREE.Group();
+        var c = renderer ? renderer.xr.getController(id) : new THREE.Group();
         
         var ret = {
             index: id || 0,
@@ -127,7 +128,7 @@ export default function (scene, config) {
 
             event.time = t;
 
-            (e.renderer.vr.isPresenting() ? hands : nohands).forEach(function (hand) {
+            (e.renderer.xr.isPresenting ? hands : nohands).forEach(function (hand) {
                 var currentObject = hand.object;
                 var c = hand.controller;
                 hand.mesh.visible = c.visible;

@@ -1,4 +1,4 @@
-import { THREE } from "./three-effects.js";
+import * as THREE  from "./three.js";
 import { OBJLoader } from "./loader/OBJLoader.js";
 import { BasisTextureLoader } from "./loader/BasisTextureLoader.js";
 

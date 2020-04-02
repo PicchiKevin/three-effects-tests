@@ -1,4 +1,5 @@
-import {THREE, attachSystem} from "../libs/three-effects.js";
+import * as THREE from "../libs/three.js";
+import attachSystem from "../libs/three-system.js" 
 
 export default function(scene) {
 
