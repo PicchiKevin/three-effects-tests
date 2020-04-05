@@ -6,6 +6,7 @@ import initGround from "./components/ground.js";
 import initSky from "./components/sky.js"
 import initPrimit from "./components/primit.js"
 import attachInteract from "./components/interact.js";
+import attachLabel from "./components/label.js";
 
 export default function () {
   const renderer = new THREE.WebGLRenderer()
@@ -14,8 +15,7 @@ export default function () {
 
   const scene = new THREE.Scene();
 
-  attachInteract(scene);
-
+  attachLabel(scene);
     load(renderer, {
       "venus_model": "./src/assets/venus/index.obj",
       "venus_diffuse": "./src/assets/venus/diffuse.basis",
@@ -39,13 +39,15 @@ export default function () {
       console.log("Loading"+ Math.floor(pc * 100) + "%");
     }).then(function(assets) {
       var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 2000 );
-        camera.position.set(20,80,0)
+      camera.position.set(0,30,0)
       
       var user = new THREE.Group();
       user.add(camera);
       user.add(renderer.vr.getController(0),renderer.vr.getController(1));
       scene.add(user);
       
+      
+
       attachInteract(scene, {debug: true});
 
       var targetPos = new THREE.Vector3();
@@ -70,7 +72,7 @@ export default function () {
       light.position.set(0,250,0)
       scene.add( light )
 
-      camera.lookAt(new THREE.Vector3(0,0,0))
+      camera.lookAt(new THREE.Vector3(0,0,0));
 
 
       // initScene(renderer, scene, camera, assets);
@@ -83,6 +85,8 @@ export default function () {
       const primit = initPrimit(renderer, scene, camera, assets);
       scene.add(primit);
       
+      user.position.set(0,100,0);
+
       document.body.appendChild( WEBVR.createButton( renderer ) );
 
       renderer.setAnimationLoop( function (time) {
